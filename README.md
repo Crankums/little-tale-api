@@ -56,5 +56,5 @@ Admin
     -delete posts + comments
     -can lock threads (prevent future comments from being posted)
 
-
+https://github.com/Crankums/little-tale-frontend
 
