@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.text :text
       t.string :title
       t.belongs_to :user
-      t.has_many :comments
+      
       t.timestamps
     end
   end
