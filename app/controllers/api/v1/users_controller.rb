@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+    before_action :set_user, only: [:show, :update, :destroy]
+
 
     def index
         user = User.all
@@ -6,29 +8,43 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def show
-        user = User.find(params[:id])
-        render json: user, status: 200
+        user_json = UserSerializer.new(user).serialized_json
+        render json: user_json, status: 200
     end
 
     def create
-        user = User.create(user_params)
-        render json: user, status: 200
+        user = User.new(user_params)
+
+        if user.save
+            session[:user_id] = user.id
+            render json: UserSerializer.new(user), status: 201
+        else
+            response = {
+                error: user.errors.full_messages
+            }
+        
+            render json: response, status: 422
+
+        end
     end
 
     def update
-        user = User.find(params[:id])
-        user.update(user_params)
-        render json: user, status: 200
+        if user.update(user_params)
+            render json: user, status: 204
+        else
+            render json: user.errors, status: 422
+        end
     end
 
     def destroy
-        user = User.find(params[:id])
-        user.delete
-
-        render json: {userId: user.id}
+        user.destroy
     end
 
     private
+
+    def set_user
+        user = User.find(params[:id])
+    end
 
     def user_params
         params.require(:user).permit(:username, :email, :password)
