@@ -19,6 +19,12 @@ class Api::V1::PostsController < ApplicationController
         post = Post.find(params[:id])
         post.update
     end
+
+    private
+
+    def post_params
+        params.require(:post).permit(:text, :title, :user_id)
+    end
     
 
 
