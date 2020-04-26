@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
 
 
     def index
-        user = User.all
+        users = User.all
         render json: users, status: 200
     end
 

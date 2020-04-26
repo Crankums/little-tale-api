@@ -3,6 +3,6 @@ class User < ApplicationRecord
     has_many :posts
     has_many :comments
 
-    validates: :username, :email, presence: true
-    validates: :username, uniqueness: true
+    validates :username, :email, presence: true
+    validates :username, uniqueness: true
 end
