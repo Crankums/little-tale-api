@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
 
     def show
         # byebug 
-        user = User.find_by(id: 1) 
+        user = User.find(params[:id]) 
 
         user_json = UserSerializer.new(user).serialized_json
         render json: user_json, status: 200
