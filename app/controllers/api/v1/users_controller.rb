@@ -32,6 +32,8 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def update
+        user = User.find(params[:id]) 
+
         if user.update(user_params)
             render json: user, status: 204
         else
@@ -40,6 +42,8 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def destroy
+        user = User.find(params[:id]) 
+
         user.destroy
     end
 
