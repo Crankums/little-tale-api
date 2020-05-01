@@ -8,6 +8,8 @@ class Api::V1::PostsController < ApplicationController
     end
 
     def show
+        post = Post.find(params[:id])
+
         render json: post, status: 200
     end
 
@@ -31,6 +33,7 @@ class Api::V1::PostsController < ApplicationController
     end
 
     def destroy
+        post = Post.find(params[:id])
         post.destroy
     end
 
@@ -38,7 +41,7 @@ class Api::V1::PostsController < ApplicationController
     private
 
     def set_post
-        post = post.find(params[:id])
+        post = Post.find(params[:id])
     end
 
     def post_params
