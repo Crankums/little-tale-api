@@ -25,8 +25,9 @@ class Api::V1::PostsController < ApplicationController
     end
 
     def update
+        post = Post.find(params[:id])
         if post.update(post_params)
-            render json: post
+            render json: post, status: :ok
         else
             render json: post.errors, status: 422
         end
@@ -45,7 +46,7 @@ class Api::V1::PostsController < ApplicationController
     end
 
     def post_params
-        params.require(:post).permit(:text, :title, :user_id)
+        params.require(:post).permit(:text, :title, :id, :user_id)
     end
     
 
